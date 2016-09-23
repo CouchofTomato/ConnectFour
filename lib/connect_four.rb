@@ -1,5 +1,1 @@
-module ConnectFour
-  class Game
-
-  end
-end
+require_relative 'connect_four/player'
