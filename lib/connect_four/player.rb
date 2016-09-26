@@ -2,9 +2,9 @@ module ConnectFour
   class Player
     attr_reader :name, :piece
 
-    def initialize(**args)
-      @name = args[:name] || 'Kevin'
-      @piece = args[:piece] || :R
+    def initialize(name, piece)
+      @name = name
+      @piece = piece
     end
   end
 end
