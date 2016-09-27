@@ -6,8 +6,8 @@ module ConnectFour
       @game_board = Array.new(6) {Array.new(7)}
     end
 
-    def place_piece(row, column, piece)
-      @game_board[row][column] = piece
+    def place_piece(column, piece)
+      @game_board[5][column-1] = piece
     end
   end
 end

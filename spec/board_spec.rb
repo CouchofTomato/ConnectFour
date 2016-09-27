@@ -22,10 +22,21 @@ module ConnectFour
       context 'when a column is empty' do
         context 'when column 5 is chosen' do
           it 'should place a piece in row 6 column 5' do
-            board.place_piece(5, 4, :R)
+            board.place_piece(5, :R)
             expect(board.game_board[5][4]).to eql :R
           end
         end
+
+        context 'when column 4 is chosen' do
+          it 'should place a piece in row 6 column 4' do
+            board.place_piece(4, :R)
+            expect(board.game_board[5][3]).to eql :R
+          end
+        end
+      end
+
+      context 'when a column is not empty' do
+        
       end
     end
   end
