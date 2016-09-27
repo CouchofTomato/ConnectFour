@@ -36,7 +36,20 @@ module ConnectFour
       end
 
       context 'when a column is not empty' do
-        
+        it 'should place a piece on top of the existing piece' do
+          board.place_piece(3, :R)
+          board.place_piece(3, :R)
+          expect(board.game_board[4][2]).to eql :R
+        end
+      end
+
+      context 'when a column is full' do
+        it 'should raise an error' do
+          6.times do
+            board.place_piece(2, :R)
+          end
+          expect(board.place_piece(2, :R)).to raise_error(IndexError)
+        end
       end
     end
   end
