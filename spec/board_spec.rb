@@ -18,7 +18,7 @@ module ConnectFour
       end
     end
 
-    describe 'place_piece' do
+    describe '#place_piece' do
       context 'when a column is empty' do
         context 'when column 5 is chosen' do
           it 'should place a piece in row 6 column 5' do
@@ -48,7 +48,22 @@ module ConnectFour
           6.times do
             board.place_piece(2, :R)
           end
-          expect(board.place_piece(2, :R)).to raise_error(IndexError)
+          expect {board.place_piece(2, :R)}.to raise_error(IndexError)
+        end
+      end
+    end
+
+    describe '#full?' do
+      context 'when the board is empty' do
+        it 'should return false' do
+          expect(board.full?).to be false
+        end
+      end
+
+      context 'when the board is full' do
+        it 'should return true' do
+          board.game_board.map!{|row| row.map {|col| col = :R}}
+          expect(board.full?).to be true
         end
       end
     end
