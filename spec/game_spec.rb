@@ -54,7 +54,7 @@ module ConnectFour
       end
 
       context 'when there is a winner' do
-        context 'when there are 4 of the same piece in the same column' do
+        context 'when there are four consecutive pieces in the same row' do
           it 'should return true' do
             4.times do
               game.board.place_piece(2, :R)

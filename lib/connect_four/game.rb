@@ -17,7 +17,7 @@ module ConnectFour
     end
 
     def winner?
-      false
+      board.row.chunk{|x| x}.map{|y, ys| [ys.length]}.flatten.select{|x| x > 3}.empty?
     end
   end
 end
