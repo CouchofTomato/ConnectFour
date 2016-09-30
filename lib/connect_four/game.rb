@@ -18,7 +18,7 @@ module ConnectFour
 
     def winner?
       return false if board.last_row.nil?
-      return winner_check?(row_arr) || winner_check?(column_arr) ? true : false
+      return winner_check?(row_arr) || winner_check?(column_arr) || diagonal_arr ? true : false
     end
 
     def row_arr
@@ -29,8 +29,22 @@ module ConnectFour
       board.game_board.transpose[board.last_column]
     end
 
+    def diagonal_arr
+      [board.game_board, board.game_board.map(&:reverse)].inject([]) do |all_diags, matrix|
+        ((-matrix.count + 1)..matrix.first.count).each do |offet_index|
+          diagonal = []
+          (matrix.count).times do |row_index|
+            col_index = offet_index + row_index
+            diagonal << matrix[row_index][col_index] if col_index >= 0
+          end
+          all_diags << diagonal.compact if diagonal.compact.count > 1
+        end
+        all_diags
+      end
+    end
+
     def winner_check?(arr)
-      arr.chunk{|x| x}.map{|y, ys| [ys.length]}.flatten.select{|x| x > 3}.empty? ? false : true
+      arr.chunk{|x| x}.any? {|y, ys| ys.length > 3}
     end
   end
 end
