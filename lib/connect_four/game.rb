@@ -17,7 +17,20 @@ module ConnectFour
     end
 
     def winner?
-      board.row.chunk{|x| x}.map{|y, ys| [ys.length]}.flatten.select{|x| x > 3}.empty?
+      return false if board.last_row.nil?
+      return winner_check?(row_arr) || winner_check?(column_arr) ? true : false
+    end
+
+    def row_arr
+      board.game_board[board.last_row]
+    end
+
+    def column_arr
+      board.game_board.transpose[board.last_column]
+    end
+
+    def winner_check?(arr)
+      arr.chunk{|x| x}.map{|y, ys| [ys.length]}.flatten.select{|x| x > 3}.empty? ? false : true
     end
   end
 end

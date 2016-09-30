@@ -48,17 +48,67 @@ module ConnectFour
 
     describe '#winner?' do
       context 'when there is no winner' do
-        it 'should return false' do
-          expect(game.winner?).to be false
+        context 'when the board is empty' do
+          it 'should return false' do
+            expect(game.winner?).to be false
+          end
+        end
+
+        context 'when there are 3 consecutive pieces in the same row' do
+          it 'should return false' do
+            game.board.place_piece(1, :R)
+            game.board.place_piece(2, :R)
+            game.board.place_piece(3, :R)
+            expect(game.winner?).to be false
+          end
+        end
+
+        context 'when there are 3 consecutive pieces in the same column' do
+          it 'should return false' do
+            3.times do
+              game.board.place_piece(7, :R)
+            end
+            expect(game.winner?).to be false
+          end
+        end
+
+        context 'when there are 3 consecutive pieces diagonally' do
+          it 'should return false'
         end
       end
 
       context 'when there is a winner' do
         context 'when there are four consecutive pieces in the same row' do
           it 'should return true' do
+            game.board.place_piece(1, :R)
+            game.board.place_piece(2, :R)
+            game.board.place_piece(3, :R)
+            game.board.place_piece(4, :R)
+            expect(game.winner?).to be true
+          end
+        end
+
+        context 'when there are four consecutive pieces in the same column' do
+          it 'should return true' do
             4.times do
-              game.board.place_piece(2, :R)
+              game.board.place_piece(5, :R)
             end
+              expect(game.winner?).to be true
+          end
+        end
+
+        context 'when there are four consecutive pieces diagonally' do
+          it 'should return true' do
+            game.board.place_piece(1, :R)
+            game.board.place_piece(2, :W)
+            game.board.place_piece(2, :R)
+            game.board.place_piece(3, :W)
+            game.board.place_piece(3, :W)
+            game.board.place_piece(3, :R)
+            game.board.place_piece(4, :R)
+            game.board.place_piece(4, :W)
+            game.board.place_piece(4, :W)
+            game.board.place_piece(4, :R)
             expect(game.winner?).to be true
           end
         end
