@@ -18,7 +18,7 @@ module ConnectFour
 
     def winner?
       return false if board.last_row.nil?
-      return winner_check?(row_arr) || winner_check?(column_arr) || diagonal_arr ? true : false
+      winner_check?(row_arr) || winner_check?(column_arr) || diagonal_winner ? true : false
     end
 
     def row_arr
@@ -27,6 +27,11 @@ module ConnectFour
 
     def column_arr
       board.game_board.transpose[board.last_column]
+    end
+
+    def diagonal_winner
+      return false if diagonal_arr.empty?
+      diagonal_arr.select{|arr| arr.length > 3}.any? {|arr| winner_check?(arr)}
     end
 
     def diagonal_arr

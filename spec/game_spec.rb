@@ -73,7 +73,16 @@ module ConnectFour
         end
 
         context 'when there are 3 consecutive pieces diagonally' do
-          it 'should return false'
+          it 'should return false' do
+            game.board.place_piece(1, :R)
+            2.times do
+              game.board.place_piece(2, :R)
+            end
+            3.times do
+              game.board.place_piece(3, :R)
+            end
+            expect(game.winner?).to be false
+          end
         end
       end
 
